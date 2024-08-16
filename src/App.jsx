@@ -43,6 +43,9 @@ export default function App() {
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="blue" />
         </mesh>
+
+        <axesHelper args={[7]}/>
+
       </Canvas>
 
       <RoomNavigator currentRoom={currentRoom} unlockRoom={unlockRoom} onSwitchRoom={switchRoom} />

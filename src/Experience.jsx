@@ -13,7 +13,7 @@ export default function Experience({ currentRoom }) {
     <>
       <CameraController currentRoom={currentRoom}/>
 
-      <color args={['#008000']} attach="background" />
+      <color args={['grey']} attach="background" />
 
       <OrbitControls makeDefault />
 

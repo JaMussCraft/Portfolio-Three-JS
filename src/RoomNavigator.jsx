@@ -3,6 +3,8 @@ import './RoomNavigator.css'
 export default function RoomNavigator({ currentRoom, unlockRoom, onSwitchRoom }) {
   const rooms = [0, 1, 2, 3] // Room IDs
 
+  const roomEmojis = ['💼', '🏸', '📺', '📫']
+
   return (
     <div className="room-icons">
       <button className="arrow-icon left" onClick={() => currentRoom > 0 && onSwitchRoom(-1)}>
@@ -16,7 +18,7 @@ export default function RoomNavigator({ currentRoom, unlockRoom, onSwitchRoom })
           }`}
           onClick={() => roomId <= unlockRoom && onSwitchRoom(0, roomId)}
         >
-          {roomId + 1}
+          {roomEmojis[roomId]}
         </div>
       ))}
       <button

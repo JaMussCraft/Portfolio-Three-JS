@@ -4,11 +4,12 @@
     left: 10px;
     display: flex;
     align-items: center;
-  }
-  
-  .room-icon {
-    width: 40px;
-    height: 40px;
+    justify-content: center;
+}
+
+.room-icon {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background-color: gray;
     margin: 0 5px;
@@ -18,26 +19,31 @@
     color: white;
     cursor: pointer;
     opacity: 0.5;
-  }
-  
-  .room-icon.unlocked {
+    user-select: none;
+    font-size: 50px;
+}
+
+.room-icon.unlocked {
     background-color: green;
+    opacity: 0.5;
+}
+
+.room-icon.active {
+    box-shadow: 0 0 0 2px yellow;
+    /* border: 2px solid yellow; */
     opacity: 1;
-  }
-  
-  .room-icon.active {
-    border: 2px solid yellow;
-  }
-  
-  .room-icon.locked {
+}
+
+.room-icon.locked {
+    background-color: red;
     cursor: not-allowed;
-  }
-  
-  .arrow-icon {
-    font-size: 24px;
+}
+
+.arrow-icon {
+    font-size: 100px;
     border: none;
     background: transparent;
-    color: black;
+    color: white;
     cursor: pointer;
-  }
-  
+    user-select: none;
+}
