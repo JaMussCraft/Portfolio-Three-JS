@@ -1,0 +1,43 @@
+.room-icons {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .room-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: gray;
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  
+  .room-icon.unlocked {
+    background-color: green;
+    opacity: 1;
+  }
+  
+  .room-icon.active {
+    border: 2px solid yellow;
+  }
+  
+  .room-icon.locked {
+    cursor: not-allowed;
+  }
+  
+  .arrow-icon {
+    font-size: 24px;
+    border: none;
+    background: transparent;
+    color: black;
+    cursor: pointer;
+  }
+  
