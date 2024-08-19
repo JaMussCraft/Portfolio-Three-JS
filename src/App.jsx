@@ -1,7 +1,13 @@
 import { Canvas } from '@react-three/fiber'
 import Experience from './Experience.jsx'
 import RoomNavigator from './RoomNavigator.jsx'
-import { useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
+import LoadingScreen from './LoadingScreen.jsx'
+import { LoadingManager } from 'three'
+import StartScreen from './StartScreen.jsx'
+import { Html, Loader, useProgress } from '@react-three/drei'
+import './LoadingScreen.css'
+
 
 export default function App() {
   const [currentRoom, setCurrentRoom] = useState(0)
@@ -18,14 +24,37 @@ export default function App() {
     }
   }
 
+  const [loaded, setLoaded] = useState(false)
+  const [started, setStarted] = useState(false)
+
+  const { progress } = useProgress()
+
+  useEffect(() => {
+    if (progress >= 100.0) {
+      console.log('loading complete')
+      handleLoad()
+    } else {
+      console.log('loading...', progress)
+    }
+  }, [progress])
+
+  const handleLoad = () => {
+    setLoaded(true)
+  }
+
+  const handleStart = () => {
+    setStarted(true)
+  }
+
   const handleCubeClick = () => {
     if (unlockRoom < 3) {
       setUnlockRoom((prevUnlockRoom) => {
-        setCurrentRoom(prevUnlockRoom+1)
-        return prevUnlockRoom+1
+        setCurrentRoom(prevUnlockRoom + 1)
+        return prevUnlockRoom + 1
       })
     }
   }
+
 
   return (
     <>
@@ -37,18 +66,30 @@ export default function App() {
           position: [5, 5, 5],
         }}
       >
-        <Experience currentRoom={currentRoom} />
+        <Suspense fallback={null}>
+          <Experience currentRoom={currentRoom} />
 
-        <mesh position={[0, 0, 0]} onClick={handleCubeClick}>
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="blue" />
-        </mesh>
+          <mesh position={[0, 0, 0]} onClick={handleCubeClick}>
+            <boxGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial color="blue" />
+          </mesh>
 
-        <axesHelper args={[7]}/>
-
+          <axesHelper args={[7]} />
+        </Suspense>
       </Canvas>
 
-      <RoomNavigator currentRoom={currentRoom} unlockRoom={unlockRoom} onSwitchRoom={switchRoom} />
+      <Loader/>
+
+
+      {loaded && started && (
+        <RoomNavigator
+          currentRoom={currentRoom}
+          unlockRoom={unlockRoom}
+          onSwitchRoom={switchRoom}
+        />
+      )}
+
+      {loaded && !started && <StartScreen onStart={handleStart} />}
     </>
   )
 }
