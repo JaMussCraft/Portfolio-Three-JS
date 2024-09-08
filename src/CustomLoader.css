@@ -1,0 +1,37 @@
+/* LoadingScreen.css */
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Semi-transparent background */
+    z-index: 6;
+    /* Make sure it's above other content */
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 6;
+    /* Ensure it's above the background */
+}
+
+.start-button {
+    position: relative;
+    z-index: 9;
+    /* Above the canvas */
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+}

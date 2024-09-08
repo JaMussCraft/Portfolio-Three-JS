@@ -2,16 +2,16 @@ import { Canvas } from '@react-three/fiber'
 import Experience from './Experience.jsx'
 import RoomNavigator from './RoomNavigator.jsx'
 import { Suspense, useEffect, useState } from 'react'
-import LoadingScreen from './LoadingScreen.jsx'
-import { LoadingManager } from 'three'
-import StartScreen from './StartScreen.jsx'
-import { Html, Loader, useProgress } from '@react-three/drei'
-import './LoadingScreen.css'
-
+import { Html, Loader, useProgress, Text } from '@react-three/drei'
+import './Fade.css'
+import CustomLoader from './CustomLoader.jsx'
+import { Leva, useControls } from 'leva'
 
 export default function App() {
   const [currentRoom, setCurrentRoom] = useState(0)
   const [unlockRoom, setUnlockRoom] = useState(0) // unlockRoom = max index of unlocked rooms
+
+  const [fade, setFade] = useState(false)
 
   const switchRoom = (direction, newRoom) => {
     if (direction) {
@@ -32,18 +32,16 @@ export default function App() {
   useEffect(() => {
     if (progress >= 100.0) {
       console.log('loading complete')
-      handleLoad()
+      setLoaded(true)
     } else {
       console.log('loading...', progress)
     }
   }, [progress])
 
-  const handleLoad = () => {
-    setLoaded(true)
-  }
-
   const handleStart = () => {
-    setStarted(true)
+    if (loaded) setStarted(true)
+
+    // !!!: play sound effect...
   }
 
   const handleCubeClick = () => {
@@ -52,12 +50,30 @@ export default function App() {
         setCurrentRoom(prevUnlockRoom + 1)
         return prevUnlockRoom + 1
       })
+      setFade(false)
     }
   }
 
+  const handleTransitionComplete = () => {
+    setShowTransition(false)
+  }
+
+  // LEVA
+  const { props } = useControls({
+    TriggerFunction: {
+      value: false,
+      onChange: (value) => {
+        // setFade(!fade)
+        console.log('fade changed to', fade)
+      },
+    },
+  })
+
+  console.log('fade is', fade)
 
   return (
     <>
+      <Leva />
       <Canvas
         camera={{
           fov: 45,
@@ -66,20 +82,19 @@ export default function App() {
           position: [5, 5, 5],
         }}
       >
-        <Suspense fallback={null}>
-          <Experience currentRoom={currentRoom} />
+        <Experience currentRoom={currentRoom} loaded={loaded} started={started} setFade={setFade} />
 
-          <mesh position={[0, 0, 0]} onClick={handleCubeClick}>
-            <boxGeometry args={[1, 1, 1]} />
-            <meshStandardMaterial color="blue" />
-          </mesh>
+        <mesh position={[0, 0, 0]} onClick={handleCubeClick}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="blue" />
+        </mesh>
 
-          <axesHelper args={[7]} />
-        </Suspense>
+        <axesHelper args={[7]} />
+
+        {!started && <CustomLoader progress={progress} loaded={loaded} onStart={handleStart} />}
       </Canvas>
 
-      <Loader/>
-
+      <div className={`fade-overlay ${fade ? '' : 'hidden'}`}></div>
 
       {loaded && started && (
         <RoomNavigator
@@ -88,8 +103,6 @@ export default function App() {
           onSwitchRoom={switchRoom}
         />
       )}
-
-      {loaded && !started && <StartScreen onStart={handleStart} />}
     </>
   )
 }
