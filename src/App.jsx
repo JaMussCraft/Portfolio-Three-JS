@@ -6,6 +6,8 @@ import { Html, Loader, useProgress, Text } from '@react-three/drei'
 import './Fade.css'
 import CustomLoader from './CustomLoader.jsx'
 import { Leva, useControls } from 'leva'
+import MagicBirdie from './MagicBirdie.jsx'
+
 
 export default function App() {
   const [currentRoom, setCurrentRoom] = useState(0)
@@ -44,8 +46,11 @@ export default function App() {
     // !!!: play sound effect...
   }
 
-  const handleCubeClick = () => {
-    if (unlockRoom < 3) {
+  const handleClick = (event) => {
+    const intersections = event.intersections;
+    console.log(intersections[0].distance)
+
+    if (unlockRoom < 3 && intersections[0].distance < 6) {
       setUnlockRoom((prevUnlockRoom) => {
         setCurrentRoom(prevUnlockRoom + 1)
         return prevUnlockRoom + 1
@@ -69,8 +74,6 @@ export default function App() {
     },
   })
 
-  console.log('fade is', fade)
-
   return (
     <>
       <Leva />
@@ -82,16 +85,19 @@ export default function App() {
           position: [5, 5, 5],
         }}
       >
+
         <Experience currentRoom={currentRoom} loaded={loaded} started={started} setFade={setFade} />
 
-        <mesh position={[0, 0, 0]} onClick={handleCubeClick}>
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="blue" />
-        </mesh>
+        {!started && <CustomLoader progress={progress} loaded={loaded} onStart={handleStart} />}
+
+        <MagicBirdie handleClick={handleClick} position={[1.1,0.5,-0.2]}/>
+        <MagicBirdie handleClick={handleClick} position={[-0.15,1.25,-1.78]}/>
+        <MagicBirdie handleClick={handleClick} position={[-0.7,0.37,0.2]}/>
+        <MagicBirdie handleClick={handleClick} position={[1,0.1,1]}/>
+
 
         <axesHelper args={[7]} />
 
-        {!started && <CustomLoader progress={progress} loaded={loaded} onStart={handleStart} />}
       </Canvas>
 
       <div className={`fade-overlay ${fade ? '' : 'hidden'}`}></div>

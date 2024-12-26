@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import './CustomLoader.css'
-import { useProgress, Text } from '@react-three/drei'
+import { useProgress, Text, Clone } from '@react-three/drei'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 

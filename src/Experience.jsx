@@ -4,6 +4,7 @@ import CameraController from './CameraController'
 import MainModel from './MainModel'
 
 export default function Experience({ currentRoom, loaded, started, setFade }) {
+  console.log('experience rendered')
   return (
     <>
       <CameraController
@@ -15,7 +16,7 @@ export default function Experience({ currentRoom, loaded, started, setFade }) {
 
       <color args={['grey']} attach="background" />
 
-      {/* <OrbitControls makeDefault /> */}
+      <OrbitControls makeDefault />
 
       <Suspense fallback={null}>
         <MainModel />
