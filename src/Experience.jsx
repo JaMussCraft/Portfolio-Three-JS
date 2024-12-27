@@ -18,9 +18,7 @@ export default function Experience({ currentRoom, loaded, started, setFade }) {
 
       <OrbitControls makeDefault />
 
-      <Suspense fallback={null}>
-        <MainModel />
-      </Suspense>
+      <MainModel scale={started? [1,1,1]: [0.1,0.1,0.1]}/>
 
       <ambientLight intensity={2.0} />
     </>

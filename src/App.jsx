@@ -4,10 +4,10 @@ import RoomNavigator from './RoomNavigator.jsx'
 import { Suspense, useEffect, useState } from 'react'
 import { Html, Loader, useProgress, Text } from '@react-three/drei'
 import './Fade.css'
-import CustomLoader from './CustomLoader.jsx'
+import CustomLoader from './StartScreen.jsx'
 import { Leva, useControls } from 'leva'
 import MagicBirdie from './MagicBirdie.jsx'
-
+import StartScreen from './StartScreen.jsx'
 
 export default function App() {
   const [currentRoom, setCurrentRoom] = useState(0)
@@ -35,8 +35,6 @@ export default function App() {
     if (progress >= 100.0) {
       console.log('loading complete')
       setLoaded(true)
-    } else {
-      console.log('loading...', progress)
     }
   }, [progress])
 
@@ -47,7 +45,7 @@ export default function App() {
   }
 
   const handleClick = (event) => {
-    const intersections = event.intersections;
+    const intersections = event.intersections
     console.log(intersections[0].distance)
 
     if (unlockRoom < 3 && intersections[0].distance < 6) {
@@ -85,20 +83,26 @@ export default function App() {
           position: [5, 5, 5],
         }}
       >
+        <Suspense fallback={null}>
+          <Experience
+            currentRoom={currentRoom}
+            loaded={loaded}
+            started={started}
+            setFade={setFade}
+          />
 
-        <Experience currentRoom={currentRoom} loaded={loaded} started={started} setFade={setFade} />
+          {/* {!started && <CustomLoader progress={progress} loaded={loaded} onStart={handleStart} />} */}
+          <MagicBirdie handleClick={handleClick} position={[1.1, 0.5, -0.2]} />
+          <MagicBirdie handleClick={handleClick} position={[-0.15, 1.25, -1.78]} />
+          <MagicBirdie handleClick={handleClick} position={[-0.7, 0.37, 0.2]} />
+          <MagicBirdie handleClick={handleClick} position={[1, 0.1, 1]} />
 
-        {!started && <CustomLoader progress={progress} loaded={loaded} onStart={handleStart} />}
-
-        <MagicBirdie handleClick={handleClick} position={[1.1,0.5,-0.2]}/>
-        <MagicBirdie handleClick={handleClick} position={[-0.15,1.25,-1.78]}/>
-        <MagicBirdie handleClick={handleClick} position={[-0.7,0.37,0.2]}/>
-        <MagicBirdie handleClick={handleClick} position={[1,0.1,1]}/>
-
+          {!started && <StartScreen onStart={handleStart}/>}
+        </Suspense>
 
         <axesHelper args={[7]} />
-
       </Canvas>
+      <Loader initialState={(active) => handleStart} />
 
       <div className={`fade-overlay ${fade ? '' : 'hidden'}`}></div>
 
