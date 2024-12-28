@@ -63,5 +63,5 @@ export default function CameraController({ currentRoom, loaded, started, setFade
     camera.lookAt(0, 0, 0)
   })
 
-  return null
+  return <pointLight intensity={started ? 30.0 : 0.0} position={cameraPositions[currentRoom]} />
 }

@@ -1,10 +1,10 @@
-import { Suspense, useState } from 'react'
-import { OrbitControls, Text } from '@react-three/drei'
+import { Suspense, useState, Shadow, useRef, useEffect } from 'react'
+import { OrbitControls, Text, BakeShadows, SoftShadows } from '@react-three/drei'
 import CameraController from './CameraController'
 import MainModel from './MainModel'
+import { Physics, RigidBody } from '@react-three/rapier'
 
 export default function Experience({ currentRoom, loaded, started, setFade }) {
-  console.log('experience rendered')
   return (
     <>
       <CameraController
@@ -18,9 +18,9 @@ export default function Experience({ currentRoom, loaded, started, setFade }) {
 
       <OrbitControls makeDefault />
 
-      <MainModel scale={started? [1,1,1]: [0.1,0.1,0.1]}/>
+      <MainModel scale={started ? [1, 1, 1] : [0.1, 0.1, 0.1]} />
 
-      <ambientLight intensity={2.0} />
+      <pointLight intensity={1000.0} position={[0, 20, 0]} />
     </>
   )
 }

@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useGLTF, Clone } from '@react-three/drei'
 
 export default function MagicBirdie({ handleClick, position }) {
   const model = useGLTF('./model/magic_birdie.glb')
+  console.log(model.scene)
 
   const [hovered, setHovered] = useState(false)
 
@@ -10,17 +11,19 @@ export default function MagicBirdie({ handleClick, position }) {
     <group position={position}>
       <mesh
         onClick={handleClick}
-        onPointerOver={() => setHovered(true)}
+        onPointerOver={() => {
+          setHovered(true)
+        }}
         onPointerOut={() => setHovered(false)}
-        position={[0,-0.04,0]}
-        scale={[0.5,0.8,0.5]}
+        position={[0, -0.04, 0]}
+        scale={[0.5, 0.8, 0.5]}
       >
-        <boxGeometry args={[0.15, 0.15, 0.15]}/>
-        <meshStandardMaterial transparent={true} opacity={0.5} />
+        <boxGeometry args={[0.15, 0.15, 0.15]} />
+        <meshStandardMaterial transparent={true} opacity={0.0} />
       </mesh>
       <Clone
         object={model.scene}
-        scale={hovered ? [0.006, 0.006, 0.006] : [0.005, 0.005, 0.005]}
+        scale={hovered ? [0.006, 0.005, 0.006] : [0.005, 0.005, 0.005]}
         color="blue"
       />
     </group>
