@@ -3,7 +3,6 @@ import { useGLTF, Clone } from '@react-three/drei'
 
 export default function MagicBirdie({ handleClick, position }) {
   const model = useGLTF('./model/magic_birdie.glb')
-  console.log(model.scene)
 
   const [hovered, setHovered] = useState(false)
 

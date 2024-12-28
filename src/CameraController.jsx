@@ -21,7 +21,6 @@ export default function CameraController({ currentRoom, loaded, started, setFade
     if (!loaded || !started) {
       camera.position.set(...cameraPositions[4])
     } else {
-      console.log('here')
       // room transitions
       if (camera.position.y <= 10) {
         setFade(true)

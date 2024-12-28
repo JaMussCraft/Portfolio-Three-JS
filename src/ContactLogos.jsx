@@ -34,7 +34,7 @@ export default function ContactLogos({ position }) {
     gitHubSoundRef.current.play()
   }
   const gmailSoundRef = useRef(new Audio(gmailSound))
-  gmailSoundRef.current.volume = 0.5
+  gmailSoundRef.current.volume = 0.3
   const playGmailSound = () => {
     if (!gmailSoundRef.current.paused) {
       return

@@ -46,7 +46,6 @@ export default function App() {
 
   useEffect(() => {
     if (progress >= 100.0) {
-      console.log('loading complete')
       setLoaded(true)
     }
   }, [progress])
@@ -59,7 +58,6 @@ export default function App() {
 
   const handleClick = (event) => {
     const intersections = event.intersections
-    console.log(intersections[0].distance)
 
     if (unlockRoom < 3 && intersections[0].distance < 6) {
       playRoomTransitionSound()
@@ -73,18 +71,19 @@ export default function App() {
 
 
   // LEVA
-  const { props } = useControls({
-    TriggerFunction: {
-      value: false,
-      onChange: (value) => {
-        // setFade(!fade)
-      },
-    },
-  })
+  // const { props } = useControls({
+  //   TriggerFunction: {
+  //     value: false,
+  //     onChange: (value) => {
+  //       // setFade(!fade)
+  //     },
+  //   },
+  // })
 
   return (
     <>
       <Leva />
+      
       <Canvas
         camera={{
           fov: 45,
@@ -109,7 +108,6 @@ export default function App() {
 
           {!started && <StartScreen onStart={handleStart} />}
 
-          <ContactLogos />
         </Suspense>
       </Canvas>
       <Loader />
