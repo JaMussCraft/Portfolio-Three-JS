@@ -101,9 +101,9 @@ export default function App() {
           />
 
           {/* {!started && <CustomLoader progress={progress} loaded={loaded} onStart={handleStart} />} */}
-          <MagicBirdie handleClick={handleClick} position={[1.1, 0.5, -0.2]} />
-          <MagicBirdie handleClick={handleClick} position={[-0.15, 1.25, -1.78]} />
-          <MagicBirdie handleClick={handleClick} position={[-0.7, 0.37, 0.2]} />
+          <MagicBirdie handleClick={handleClick} position={[1.1, 0.48, -0.2]} />
+          <MagicBirdie handleClick={handleClick} position={[-0.15, 1.21, -1.78]} />
+          <MagicBirdie handleClick={handleClick} position={[-0.7, 0.35, 0.2]} />
           {/* <MagicBirdie handleClick={handleClick} position={[1, 0.1, 1]} /> */}
 
           {!started && <StartScreen onStart={handleStart} />}

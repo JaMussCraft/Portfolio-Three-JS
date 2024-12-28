@@ -68,7 +68,8 @@ export default function ContactLogos({ position }) {
   }
   const handleGitHubHover = (event) => {
     const distance = event.intersections[0].distance
-    if (!gitHubCanHover || distance > 6) return
+    console.log(distance)
+    if (!gitHubCanHover || distance > 5.2) return
 
     gitHubRef.current.applyImpulse({ x: 0, y: 0.1, z: 0 }, true)
     gitHubRef.current.applyTorqueImpulse({ x: 0, y: 0.01, z: 0 }, true)
