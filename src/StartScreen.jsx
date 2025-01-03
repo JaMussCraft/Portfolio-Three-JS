@@ -24,11 +24,11 @@ export default function StartScreen({ onStart }) {
       />
 
       <Text
-        color="gold"
-        anchorX="center"
-        anchorY="middle"
+        color='gold'
+        anchorX='center'
+        anchorY='middle'
         fontSize={1}
-        textAlign="center"
+        textAlign='center'
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0, 5, 0]}
         onClick={onStart}

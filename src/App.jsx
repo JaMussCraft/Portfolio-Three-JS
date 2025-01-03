@@ -2,14 +2,10 @@ import { Canvas } from '@react-three/fiber'
 import Experience from './Experience.jsx'
 import RoomNavigator from './RoomNavigator.jsx'
 import { Suspense, useEffect, useRef, useState } from 'react'
-import { Html, Loader, useProgress, Text, BakeShadows } from '@react-three/drei'
+import { Loader, useProgress } from '@react-three/drei'
 import './Fade.css'
-import CustomLoader from './StartScreen.jsx'
-import { Leva, useControls } from 'leva'
 import MagicBirdie from './MagicBirdie.jsx'
 import StartScreen from './StartScreen.jsx'
-import { Physics, RigidBody } from '@react-three/rapier'
-import ContactLogos from './ContactLogos.jsx'
 import roomTransitionSound from '../public/sounds/room_transition_sound.mp3' 
 
 export default function App() {
@@ -18,15 +14,14 @@ export default function App() {
 
   const [fade, setFade] = useState(false)
 
-  const roomTransitionSoundRef = useRef(new Audio(roomTransitionSound));
-  roomTransitionSoundRef.current.volume = 0.5;
+  const roomTransitionSoundRef = useRef(new Audio(roomTransitionSound))
+  roomTransitionSoundRef.current.volume = 0.5
   const playRoomTransitionSound = () => {
     if (!roomTransitionSoundRef.current.paused) {
-      return;
+      return
     }
-    roomTransitionSoundRef.current.play();
+    roomTransitionSoundRef.current.play()
   }
-
 
   const switchRoom = (direction, newRoom) => {
     if (direction) {
@@ -52,8 +47,6 @@ export default function App() {
 
   const handleStart = () => {
     if (loaded) setStarted(true)
-
-    // !!!: play sound effect...
   }
 
   const handleClick = (event) => {
@@ -69,21 +62,8 @@ export default function App() {
     }
   }
 
-
-  // LEVA
-  // const { props } = useControls({
-  //   TriggerFunction: {
-  //     value: false,
-  //     onChange: (value) => {
-  //       // setFade(!fade)
-  //     },
-  //   },
-  // })
-
   return (
     <>
-      <Leva />
-      
       <Canvas
         camera={{
           fov: 45,
@@ -99,21 +79,14 @@ export default function App() {
             started={started}
             setFade={setFade}
           />
-
-          {/* {!started && <CustomLoader progress={progress} loaded={loaded} onStart={handleStart} />} */}
           <MagicBirdie handleClick={handleClick} position={[1.1, 0.48, -0.2]} />
           <MagicBirdie handleClick={handleClick} position={[-0.15, 1.21, -1.78]} />
           <MagicBirdie handleClick={handleClick} position={[-0.7, 0.35, 0.2]} />
-          {/* <MagicBirdie handleClick={handleClick} position={[1, 0.1, 1]} /> */}
-
           {!started && <StartScreen onStart={handleStart} />}
-
         </Suspense>
       </Canvas>
       <Loader />
-
       <div className={`fade-overlay ${fade ? '' : 'hidden'}`}></div>
-
       {loaded && started && (
         <RoomNavigator
           currentRoom={currentRoom}
