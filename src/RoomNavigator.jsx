@@ -6,8 +6,8 @@ export default function RoomNavigator({ currentRoom, unlockRoom, onSwitchRoom })
   const roomEmojis = ['💼', '🏸', '📺', '📫']
 
   return (
-    <div className="room-icons">
-      <button className="arrow-icon left" onClick={() => currentRoom > 0 && onSwitchRoom(-1)}>
+    <div className='room-icons'>
+      <button className='arrow-icon left' onClick={() => currentRoom > 0 && onSwitchRoom(-1)}>
         &lt;
       </button>
       {rooms.map((roomId) => (
@@ -22,7 +22,7 @@ export default function RoomNavigator({ currentRoom, unlockRoom, onSwitchRoom })
         </div>
       ))}
       <button
-        className="arrow-icon right"
+        className='arrow-icon right'
         onClick={() => currentRoom < unlockRoom && onSwitchRoom(1)}
       >
         &gt;

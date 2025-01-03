@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Center, Outlines, useGLTF } from '@react-three/drei'
 import linkedInSound from '../public/sounds/linkedin_sound.mp3'
 import gitHubSound from '../public/sounds/github_sound.mp3'

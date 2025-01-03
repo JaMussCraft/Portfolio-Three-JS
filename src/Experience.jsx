@@ -2,7 +2,6 @@ import { Suspense, useState, Shadow, useRef, useEffect } from 'react'
 import { OrbitControls, Text, BakeShadows, SoftShadows, Text3D } from '@react-three/drei'
 import CameraController from './CameraController'
 import MainModel from './MainModel'
-import { Physics, RigidBody } from '@react-three/rapier'
 import ContactLogos from './ContactLogos'
 import Project from './Project'
 
@@ -35,7 +34,6 @@ const textGenerationProject = {
   imagePath: 'images/text_generation_image.png',
 }
 
-
 export default function Experience({ currentRoom, loaded, started, setFade }) {
   return (
     <>
@@ -46,21 +44,28 @@ export default function Experience({ currentRoom, loaded, started, setFade }) {
         setFade={setFade}
       />
 
-      <color args={['grey']} attach="background" />
+      <color args={['grey']} attach='background' />
 
       {/* <OrbitControls makeDefault /> */}
 
       <MainModel scale={started ? [1, 1, 1] : [0.1, 0.1, 0.1]} />
 
-      <ContactLogos/>
+      <ContactLogos />
 
-      <Project position={[0.13, 1, 1.2]} rotation={[0,0,0]} project={waterSamplerProject}/>
-      <Project position={[0.13, 1.9, 1.2]} rotation={[0,0,0]} project={stickmanBadmintonProject}/>
-      <Project position={[1.2, 1.9, 0.13]} rotation={[0,-Math.PI*0.5,0]} project={sentimentAnalysisProject}/>
-      <Project position={[1.2, 1, 0.13]} rotation={[0,-Math.PI*0.5,0]} project={textGenerationProject}/>
+      <Project position={[0.13, 1, 1.2]} rotation={[0, 0, 0]} project={waterSamplerProject} />
+      <Project position={[0.13, 1.9, 1.2]} rotation={[0, 0, 0]} project={stickmanBadmintonProject} />
+      <Project
+        position={[1.2, 1.9, 0.13]}
+        rotation={[0, -Math.PI * 0.5, 0]}
+        project={sentimentAnalysisProject}
+      />
+      <Project
+        position={[1.2, 1, 0.13]}
+        rotation={[0, -Math.PI * 0.5, 0]}
+        project={textGenerationProject}
+      />
 
       <pointLight intensity={1000.0} position={[0, 20, 0]} />
-
     </>
   )
 }
