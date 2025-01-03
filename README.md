@@ -1,6 +1,6 @@
 # Badminton-Themed 3D Portfolio
 
-![Project Image](/workspaces/Portfolio-Three-JS/public/images/contact_room_screenshot.jpeg)
+<img src="./public/images/contact_room_screenshot.jpeg" alt="Project Image" width="100%">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
