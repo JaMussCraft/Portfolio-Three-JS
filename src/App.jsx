@@ -7,6 +7,7 @@ import './Fade.css'
 import MagicBirdie from './MagicBirdie.jsx'
 import StartScreen from './StartScreen.jsx'
 import roomTransitionSound from '../public/sounds/room_transition_sound.mp3' 
+import InstructionText from './InstructionText.jsx';
 
 export default function App() {
   const [currentRoom, setCurrentRoom] = useState(0)
@@ -88,11 +89,14 @@ export default function App() {
       <Loader />
       <div className={`fade-overlay ${fade ? '' : 'hidden'}`}></div>
       {loaded && started && (
-        <RoomNavigator
-          currentRoom={currentRoom}
-          unlockRoom={unlockRoom}
-          onSwitchRoom={switchRoom}
-        />
+        <>
+          <RoomNavigator
+            currentRoom={currentRoom}
+            unlockRoom={unlockRoom}
+            onSwitchRoom={switchRoom}
+          />
+          <InstructionText />
+        </>
       )}
     </>
   )
